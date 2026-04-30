@@ -1,0 +1,94 @@
+.petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* pétala individual */
+.petal {
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  pointer-events: none;
+
+  z-index: 3;
+
+  will-change: transform;
+}
+
+.petal svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* @keyframes fall {
+  0% {
+    transform: translate3d(var(--x-start), -10%, 0)
+               rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate3d(calc(var(--x-start) + var(--drift)), 50vh, 0)
+               rotate(180deg);
+  }
+
+  100% {
+    transform: translate3d(calc(var(--x-start) + var(--drift) * 2), 110vh, 0)
+               rotate(360deg);
+    opacity: 0;
+  }
+} */
+
+@keyframes sakuraFall {
+  0% {
+    transform: translate3d(var(--x), var(--y), 0)
+               rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  25% {
+    transform: translate3d(
+        calc(var(--x) - 25vw),
+        calc(var(--y) + 25vh + var(--wave1)),
+      0
+    ) rotate(90deg);
+  }
+
+  50% {
+    transform: translate3d(
+      calc(var(--x) - 75vw),
+      calc(var(--y) + 50vh + var(--wave2)),
+      0
+    ) rotate(180deg);
+  }
+
+  75% {
+    transform: translate3d(
+      calc(var(--x) - 100vw),
+      calc(var(--y) + 75vh + var(--wave3)),
+      0
+    ) rotate(270deg);
+  }
+
+  100% {
+    transform: translate3d(
+      calc(var(--x) - 160vw),
+      calc(var(--y) + 70vh  + var(--wave4)),
+      0
+    ) rotate(360deg);
+
+    opacity: 0;
+  }
+}

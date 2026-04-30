@@ -1,3 +1,8 @@
+:root{
+  --color-primary: #F0F0F0;
+  --color-secondary: #c0c0c0; 
+  --filter-logo: 100%; 
+}
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +11,12 @@ body {
   width: 100%;
   background-color: #0c0c0c;
   overflow-x: hidden;
+  transition: all 0.4s ease;
+}
+body.light {
+  --color-primary: #0c0c0c;
+  --color-secondary: #444;
+  --filter-logo: 0%; 
 }
 html {
   scroll-behavior: smooth;
@@ -59,7 +70,7 @@ nav {
   max-height: 80px;
   width: auto;
 
-  filter: invert(100%);
+  filter: invert(var(--filter-logo));
 }
 
 .nav-menu {
@@ -80,15 +91,15 @@ nav {
 .nav-link {
   text-decoration: none;
   font-size: 1.5rem;
-  color: #c0c0c0;
+  color: var(--color-secondary);
 }
 .nav-link:hover {
-  color: #f0f0f0;
+  color: var(--color-primary);
 }
 .nav-link-active {
   font-weight: bolder;
   font-size: 1.6rem;
-  color: #f0f0f0;
+  color: var(--color-primary);
 }
 
 .line {
@@ -106,12 +117,55 @@ nav {
   height: 100dvh;
   width: 100%;
   overflow: hidden;
-  background-image: url(../sources/img/bg-2.png);
+
+  background-image: url(../sources/img/bg-2.png); /* DARK */
   background-repeat: repeat-x;
   background-size: auto 100%;
 
   animation: skyMove 120s linear infinite;
+
+  transition: filter 1.5s ease;
 }
+
+#main.hovered {
+  filter: brightness(1.1) saturate(1.2);
+}
+
+#main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url(../sources/img/bg-1.png); /* LIGHT */
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+
+  animation: skyMove 120s linear infinite;
+
+  z-index: 0;
+
+  opacity: 0;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 40%,
+    black 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 40%,
+    black 100%
+  );
+
+  transition: opacity 1.5s ease;
+}
+
+#main.hovered::before {
+  opacity: 1;
+}
+
 #main::after {
   content: "";
   position: absolute;
@@ -120,7 +174,14 @@ nav {
   background: rgba(0, 0, 0, 0.5);
 
   z-index: 1;
+
+  transition: opacity 1.2s ease;
 }
+
+#main.hovered::after {
+  opacity: 0;
+}
+
 @keyframes skyMove {
   from {
     background-position: 0 0;
@@ -141,7 +202,28 @@ nav {
   z-index: 2;
 
   pointer-events: none;
+
   filter: sepia(20%) brightness(0.8) contrast(1.2);
+
+  transition:
+    opacity 1s ease,
+    transform 1.2s ease,
+    filter 1s ease;
+}
+
+#main.hovered #dragon {
+  opacity: 0;
+  transform: translateY(-80px) scale(0.9);
+  filter: blur(4px);
+}
+
+.petals {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#main.hovered .petals {
+  opacity: 1;
 }
 
 .glass {
@@ -174,7 +256,7 @@ nav {
 }
 
 .hello {
-  color: white;
+  color: var(--color-primary);
   font-size: 4rem;
 }
 
@@ -185,7 +267,7 @@ nav {
 
 .blink {
   font-weight: bold;
-  background-color: white;
+  background-color: var(--color-primary);
   animation: blink 1s steps(1) infinite;
 }
 @keyframes blink {
@@ -207,7 +289,7 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
 
-  color: white;
+  color: var(--color-primary);
   text-align: center;
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -250,7 +332,7 @@ nav {
 }
 .social a {
   font-size: 2rem;
-  color: #f0f0f0;
+  color: var(--color-primary);
 
   transition:
     color 0.5s ease,
@@ -266,9 +348,9 @@ nav {
 #instagram {
   background: linear-gradient(
     30deg,
-    #f0f0f0,
-    #f0f0f0,
-    #f0f0f0,
+    var(--color-primary),
+    var(--color-primary),
+    var(--color-primary),
     #fcc303,
     #fd1d78,
     #7a11f9

@@ -78,3 +78,19 @@ function typeEffect() {
 }
 
 typeEffect();
+
+
+// MAIN - BACKGROUND DINAMICO
+const hero = document.getElementById('hero-card');
+const main = document.getElementById('main');
+const body = document.getElementsByTagName('body')[0];
+
+hero.addEventListener('mouseenter', () => {
+  main.classList.add('hovered');
+  body.classList.add('light');
+});
+
+hero.addEventListener('mouseleave', () => {
+  main.classList.remove('hovered');
+  body.classList.remove('light');
+});
