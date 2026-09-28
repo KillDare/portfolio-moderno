@@ -1,6 +1,6 @@
 #about {
   position: relative;
-  height: 100dvh;
+  height: auto;
   width: 100%;
   overflow: hidden;
 }

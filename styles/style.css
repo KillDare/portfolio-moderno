@@ -134,3 +134,133 @@ nav {
     opacity: 1;
     transform: translateX(0);
 }
+
+/* ========================================
+   MENU MOBILE
+======================================== */
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+
+    nav {
+        padding: 0 30px;
+        box-sizing: border-box;
+    }
+
+    .nav-link {
+        font-size: 1.3rem;
+    }
+
+    .nav-link-active {
+        font-size: 1.4rem;
+    }
+}
+
+
+/* ========================================
+   CELULAR
+======================================== */
+
+@media (max-width: 700px) {
+
+    header {
+        height: 70px;
+    }
+
+    nav {
+        height: 70px;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    .logo {
+        width: auto;
+    }
+
+    .nav-logo img {
+        max-height: 65px;
+    }
+
+    .menu-toggle {
+        display: block;
+        width: 45px;
+        height: 45px;
+        z-index: 1001;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+
+        width: 100%;
+
+        background-color: rgba(12, 12, 12, 0.97);
+        backdrop-filter: blur(10px);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease,
+            visibility 0.3s ease;
+    }
+
+    .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-list {
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        padding: 10px 20px 20px;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-link {
+        display: block;
+
+        width: 100%;
+        padding: 15px 0;
+
+        box-sizing: border-box;
+
+        font-size: 1.2rem;
+    }
+
+    .nav-link-active {
+        font-size: 1.3rem;
+    }
+
+    .line {
+        width: 0;
+    }
+
+    .nav-link:hover > .line {
+        width: 100%;
+    }
+}
