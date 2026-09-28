@@ -45,6 +45,58 @@ async function carregarSections() {
   await carregarScript('petals.js');
 
 
+
+  // HEADER - VERIFICA E CONTROLA A SEÇÃO ATIVA
+  const sections = document.querySelectorAll("section");
+  const menuItems = document.querySelectorAll(".nav-link");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const id = entry.target.id;
+
+        menuItems.forEach((item) => {
+          item.classList.toggle(
+            "nav-link-active",
+            item.getAttribute("href") === `#${id}`,
+          );
+        });
+        sections.forEach((item) => {
+          item.classList.toggle(
+            "mostrar",
+            item.getAttribute("id") === `${id}` && item.getAttribute("id") != `main`,
+          );
+        });
+      });
+    },
+    {
+      rootMargin: "-50% 0px -50% 0px",
+      threshold: 0,
+    },
+  );
+  sections.forEach((section) => observer.observe(section));
+
+  // HEADER - BACKGROUND DINAMICO
+  const header = document.querySelector("header");
+  const mainSection = document.getElementById("main");
+
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const sectionHeight = mainSection.offsetHeight;
+
+    let progress = scrollY / sectionHeight;
+
+    progress = Math.min(Math.max(progress, 0), 1);
+
+    header.style.backgroundColor = `rgba(0, 0, 0, ${progress})`;
+
+    header.style.backdropFilter = `blur(${progress * 10}px)`;
+  });
+
+
+
   // HERO - TEXTO DINAMICO
   const heroText = document.getElementById("hero-text");
   const heroTexts = [
@@ -104,47 +156,3 @@ async function carregarSections() {
 
 document.addEventListener('DOMContentLoaded', carregarSections);
 
-
-
-// HEADER - VERIFICA E CONTROLA A SEÇÃO ATIVA
-const sections = document.querySelectorAll("section");
-const menuItems = document.querySelectorAll(".nav-link");
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-
-      const id = entry.target.id;
-
-      menuItems.forEach((item) => {
-        item.classList.toggle(
-          "nav-link-active",
-          item.getAttribute("href") === `#${id}`,
-        );
-      });
-    });
-  },
-  {
-    rootMargin: "-50% 0px -50% 0px",
-    threshold: 0,
-  },
-);
-sections.forEach((section) => observer.observe(section));
-
-// HEADER - BACKGROUND DINAMICO
-const header = document.querySelector("header");
-const mainSection = document.getElementById("main");
-
-window.addEventListener("scroll", () => {
-  const scrollY = window.scrollY;
-  const sectionHeight = mainSection.offsetHeight;
-
-  let progress = scrollY / sectionHeight;
-
-  progress = Math.min(Math.max(progress, 0), 1);
-
-  header.style.backgroundColor = `rgba(0, 0, 0, ${progress})`;
-
-  header.style.backdropFilter = `blur(${progress * 10}px)`;
-});

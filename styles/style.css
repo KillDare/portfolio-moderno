@@ -122,3 +122,15 @@ nav {
 .nav-link:hover>.line {
   width: 100%;
 }
+
+
+.esconder {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.esconder.mostrar {
+    opacity: 1;
+    transform: translateX(0);
+}
