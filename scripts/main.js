@@ -66,12 +66,12 @@ function typeEffect() {
   let speed = isDeleting ? 50 : 100;
 
   if (!isDeleting && charIndex === currentText.length + 1) {
-    speed = 1500; // pausa antes de apagar
+    speed = 1500;
     isDeleting = true;
   } else if (isDeleting && charIndex === 0) {
     isDeleting = false;
     textIndex = (textIndex + 1) % heroTexts.length;
-    speed = 500; // pausa antes de digitar próximo
+    speed = 500; 
   }
 
   setTimeout(typeEffect, speed);
